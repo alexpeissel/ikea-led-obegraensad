@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 #include <vector>
-#include "mode/mode.h"
+#include "PluginManager.h"
 #include "signs.h"
 #include "constants.h"
 #include "storage.h"
@@ -42,7 +42,7 @@ public:
   Screen_(const Screen_ &) = delete;
   Screen_ &operator=(const Screen_ &) = delete;
 
-public:
+  bool isCacheEmpty();
   int currentRotation;
 
   uint8_t getCurrentBrightness() const;
@@ -70,6 +70,9 @@ public:
   void drawBigNumbers(int x, int y, std::vector<int> numbers, uint8_t brightness = 255);
   void drawWeather(int x, int y, int weather, uint8_t brightness = 255);
   std::vector<int> readBytes(std::vector<int> bytes);
+
+  void scrollText(std::string text, int delayTime = 30, uint8_t brightness = 255, uint8_t fontid = 0 );
+  void scrollGraph(std::vector<int> graph = {}, int miny = 0, int maxy = 15, int delayTime = 60, uint8_t brightness = 255);
 };
 
 extern Screen_ &Screen;
